@@ -10,8 +10,8 @@ Do uruchomienia aplikacji wymagane są następujące aplikacje
 1. Pobieramy kod lub kopiujemy link do repozytorium (SSH lub HTTPS)
 2. Na dysku twardym tworzymy katalog
 3. Za pomocą komendy git clone pobieramy kod przykład dla ssh:<br>`git clone git@github.com:jedam123/scale-image.git`
-4. Przechodzimy do folderu w którym znajdują się pliki i wykonujemy polecenie `docker compose build`
-5. Po pobraniu dockera uruchamiamy komende <br>`composer update`
+4. Po pobraniu dockera uruchamiamy komende <br>`composer update`
+5. Przechodzimy do folderu w którym znajdują się pliki i wykonujemy polecenie `docker compose build`
 6. Następnie w celu uruchomienia projektu wykonujemy komende `docker-compose up`
 7. W celu sprawdzenia czy aplikacja działa poprawnie otwieramy w przeglądarce adres `localhost:8080` jeśli widzimy
    domyślną stronę symfony oznacza to, że aplikacja jest poprawnie uruchomiona.
