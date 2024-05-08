@@ -17,6 +17,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 )]
 class ScaleImageCommand extends Command
 {
+    private static string $IMAGE_SRC_PROP = 'image-src';
+    private static string $PATH_OR_TOKEN_PROP = 'path-or-token';
+    private static string $MODE_PROP = 'mode';
 
     private ScaleImageService $scaleImageService;
 
@@ -30,14 +33,23 @@ class ScaleImageCommand extends Command
     {
         $this
             ->setDescription('Scale an image')
-            ->addArgument('image-src', InputArgument::REQUIRED, 'Path to the input image')
-            ->addArgument('path-or-token', InputArgument::REQUIRED, 'Describe path or access token ')
-            ->addArgument('mode', InputArgument::OPTIONAL, 'Select save mode (local or dropbox)');
+            ->addArgument(self::$IMAGE_SRC_PROP, InputArgument::REQUIRED, 'Path to the input image')
+            ->addArgument(self::$PATH_OR_TOKEN_PROP, InputArgument::REQUIRED, 'Describe path or access token')
+            ->addArgument(self::$MODE_PROP, InputArgument::OPTIONAL, 'Select save mode (local or dropbox)');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
+            $imagePath = $input->getArgument(self::$IMAGE_SRC_PROP);
+            $pathOrToken = $input->getArgument(self::$PATH_OR_TOKEN_PROP);
+            $option = $input->getArgument(self::$MODE_PROP);
+
+            $statusMessage = match ($option) {
+                'dropbox' => $this->scaleImageService->saveInDropbox($imagePath, $pathOrToken),
+                default => $this->scaleImageService->saveLocally($imagePath, $pathOrToken),
+            };
+            $output->writeln($statusMessage);
 
             return Command::SUCCESS;
         } catch (\Exception $e) {
