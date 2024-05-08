@@ -52,7 +52,7 @@ class ScaleImageCommand extends Command
             $output->writeln($statusMessage);
 
             return Command::SUCCESS;
-        } catch (\Exception $e) {
+        } catch (ScaleImageServiceException|\Exception $e) {
             $output->writeln('An error occurred: ' . $e->getMessage());
             return Command::FAILURE;
         }
