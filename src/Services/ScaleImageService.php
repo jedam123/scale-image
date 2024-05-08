@@ -39,7 +39,7 @@ class ScaleImageService
         $thumbnailContent = file_get_contents($thumbnailPath);
         unlink($thumbnailPath);
 
-        return "";
+        return $this->dropboxService->uploadFile($accessToken, $sourcePath, $thumbnailContent);
     }
 
     private function createThumbnail(string $inputPath, string $destinationPath): void
