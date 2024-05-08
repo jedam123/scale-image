@@ -57,5 +57,4 @@ class ScaleImageCommand extends Command
             return Command::FAILURE;
         }
     }
-
 }
